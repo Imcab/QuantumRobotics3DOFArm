@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Arm.js</title>
+
+  <!-- Importamos el css a la página al igual que la fuente Inter desde google-->
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  </style>
+  
+</head>
+
+<body>
+
+  <!-- Títulos -->
+  <h1>Arm control 3DOF </h1>
+  <h2>Imad Jared Cabrera Trejo</h2>
+
+  <!-- Aqui vamos a juntar los sliders y los botones al igual que el gráfico en un contenedor-->
+  <div class="container">
+
+    <!-- Cambiamos el tamaño de la gráfica para que se vea mejor -->
+    <canvas id="arm" style="width:100%;max-width:600px;"></canvas>
+
+    <!-- Controles de cinemática y botones -->
+    <div class="controls">
+
+      <h3>Forward Kinematics</h3>
+
+      <label>Theta 1: <span id="val1">0</span>°</label>
+      <input type="range"  class = "slider red" id ="theta1" min="-180" max="180" value="0">
+      <input type="number" id="theta1Input" min="-180" max="180" value="0"><br>
+
+      <label>Theta 2: <span id="val2">0</span>°</label>
+      <input type="range" class="slider green" id="theta2" min="-180" max="180" value="0">
+      <input type="number" id="theta2Input" min="-180" max="180" value="0"><br>
+
+      <label>Theta 3: <span id="val3">0</span>°</label>
+      <input type="range" class="slider blue" id="theta3" min="-180" max="180" value="0">
+      <input type="number" id="theta3Input" min="-180" max="180" value="0"><br>
+
+      <button onclick="toPosition(90,-80,60)" id="default1" class="button position"> Position 1 </button>
+
+      <button onclick="toPosition(140,-110,-30)" id="default2" class="button position"> Position 2 </button>
+
+      <button onclick="toPosition(0,0,0)" id="default3" class="button Reset"> Reset position </button>
+
+      </div>
+
+    <!-- Controles de cinematica inversa-->
+    <div class="controlsTwo">
+
+    <h3>Inverse Kinematics</h3>
+
+    <label> Arm X: <span id="valX">0</span></label>
+    <input type="number" id="xInput" min="-11" max="11" value="0"><br>
+
+    <label> Arm Y: <span id="valY">0</span></label>
+    <input type="number" id="yInput" min="-11" max="11" value="0"><br>
+
+    <label> Arm Degrees: <span id="valRot">0</span>°</label>
+    <input type="number" id="rotInput" min="-180" max="180" value="0"><br>
+
+    <div class="ik-toggle">
+      <button id="ikUp" class="ik-button active">Elbow Up</button>
+      <button id="ikDown" class="ik-button">Elbow Down</button>
+    </div>
+    <br>
+
+    <button onclick="moveToXY()" class="button submit">Submit IK</button>
+
+      <div>
+        <h3>End Effector Control</h3>
+        <button onmousedown="rotateEndEffector(-1)" onmouseup="stopRotation()" onmouseleave="stopRotation()" class="button clock">Rotate clockwise</button>
+        <button onmousedown="rotateEndEffector(1)" onmouseup="stopRotation()" onmouseleave="stopRotation()" class="button clock">Rotate counter clockwise</button>
+     
+        <h3>Arm measures</h3>
+
+        <div class="arm-measures">
+            <p><strong>Link 1:</strong> 5</p>
+            <p><strong>Link 2:</strong> 4</p>
+            <p><strong>Link 3:</strong> 2</p>
+          </div>
+        </div>
+
+        </div>
+
+  <!-- Fin del contenedor -->
+  </div>
+  
+  <!-- Importamos el script.js para que funcione la página -->
+  <script src="script.js"></script>
+</body>
+</html>
